@@ -20,9 +20,6 @@ class ScoreCalculatorShould {
             "0,0,Love-All",
             "1,1,Fifteen-All",
             "2,2,Thirty-All",
-            "3,3,Forty-All",
-
-            "4,4,Deuce"
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
         ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);
