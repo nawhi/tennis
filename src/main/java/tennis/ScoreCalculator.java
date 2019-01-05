@@ -19,11 +19,13 @@ class ScoreCalculator {
     private final int player1Score;
     private final int player2Score;
     private final int scoreDifference;
+    private final ScoreFormatter formatter;
 
     ScoreCalculator(int player1Score, int player2Score) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
         this.scoreDifference = scoreDifference();
+        formatter = new ScoreFormatter();
     }
 
     String score() {
@@ -51,7 +53,7 @@ class ScoreCalculator {
     }
 
     private String winner() {
-        return new ScoreFormatter().game(leadingPlayer());
+        return formatter.game(leadingPlayer());
     }
 
     private boolean goneToDeuce() {
@@ -60,7 +62,7 @@ class ScoreCalculator {
 
     private String endgame() {
         if (player1Score == player2Score) {
-            return DEUCE;
+            return new ScoreFormatter().deuce();
         }
         if (scoreDifference > 1)
             return winner();
@@ -68,7 +70,7 @@ class ScoreCalculator {
     }
 
     private String advantage() {
-        return new ScoreFormatter().advantage(leadingPlayer());
+        return formatter.advantage(leadingPlayer());
     }
 
     private int leadingPlayer() {
@@ -80,11 +82,11 @@ class ScoreCalculator {
     }
 
     private String simpleDraw() {
-        return SCORES.get(player2Score) + SEPARATOR + ALL;
+        return formatter.simpleDraw(player1Score);
     }
 
     private String simpleScore() {
-        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
+        return formatter.simpleScore(player1Score, player2Score);
     }
 
 }
