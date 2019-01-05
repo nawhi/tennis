@@ -40,7 +40,7 @@ class ScoreCalculator {
     }
 
     private String winner() {
-        return "Game " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
+        return "Game " + leadingPlayer();
     }
 
     private boolean goneToDeuce() {
@@ -51,9 +51,17 @@ class ScoreCalculator {
         if (player1Score == player2Score) {
             return DEUCE;
         }
-        if (Math.abs(player2Score - player1Score) > 1)
+        if (scoreDifference() > 1)
             return winner();
-        return "Advantage " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
+        return "Advantage " + leadingPlayer();
+    }
+
+    private String leadingPlayer() {
+        return (player2Score > player1Score) ? "Player 2" : "Player 1";
+    }
+
+    private int scoreDifference() {
+        return Math.abs(player2Score - player1Score);
     }
 
     private String playerWins(int player) {
