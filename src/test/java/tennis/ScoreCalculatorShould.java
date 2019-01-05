@@ -11,4 +11,10 @@ class ScoreCalculatorShould {
         ScoreCalculator calculator = new ScoreCalculator(new Score(0, 0));
         assertEquals("Love-All", calculator.score());
     }
+
+    @Test
+    void return_fifteen_love_for_1_nil() {
+        ScoreCalculator calculator = new ScoreCalculator(new Score(1, 0));
+        assertEquals("Fifteen-Love", calculator.score());
+    }
 }
