@@ -9,11 +9,11 @@ class Score {
         this.player2 = player2;
     }
 
-    public int player1() {
+    int player1() {
         return player1;
     }
 
-    public int player2() {
+    int player2() {
         return player2;
     }
 }
