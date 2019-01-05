@@ -23,9 +23,11 @@ class ScoreCalculator {
     }
 
     String score() {
+        if (player1Score > 3)
+            return "Game Player 1";
+        if (player2Score > 3)
+            return "Game Player 2";
         if (player1Score == player2Score) {
-            if (player1Score > 3)
-                return "Deuce";
             return SCORES.get(player2Score) + SEPARATOR + ALL;
         }
         return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
