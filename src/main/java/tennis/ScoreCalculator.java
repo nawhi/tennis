@@ -24,12 +24,24 @@ class ScoreCalculator {
 
     String score() {
         if (player1Score > 3)
-            return "Game Player 1";
+            return playerWins(1);
         if (player2Score > 3)
-            return "Game Player 2";
+            return playerWins(2);
         if (player1Score == player2Score) {
-            return SCORES.get(player2Score) + SEPARATOR + ALL;
+            return regularDraw();
         }
+        return regularScore();
+    }
+
+    private String playerWins(int player) {
+        return "Game Player " + player;
+    }
+
+    private String regularScore() {
         return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
+    }
+
+    private String regularDraw() {
+        return SCORES.get(player2Score) + SEPARATOR + ALL;
     }
 }
