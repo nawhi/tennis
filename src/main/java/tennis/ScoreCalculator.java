@@ -29,14 +29,22 @@ class ScoreCalculator {
             return endgameScore();
         }
 
-        if (player1Score > 3 || player2Score > 3) {
+        if (gotAWinner()) {
             return winner();
         }
 
+        return regularScore();
+    }
+
+    private String regularScore() {
         if (player1Score == player2Score) {
             return simpleDraw();
         }
         return simpleScore();
+    }
+
+    private boolean gotAWinner() {
+        return player1Score > 3 || player2Score > 3;
     }
 
     private String winner() {
