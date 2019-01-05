@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ScoreCalculator {
+    private static final String SEPARATOR = "-";
+    private static final String ALL = "All";
     private final int player1Score;
     private final int player2Score;
     private static final Map<Integer, String> SCORES = new HashMap<>();
@@ -22,8 +24,10 @@ class ScoreCalculator {
 
     String score() {
         if (player1Score == player2Score) {
-            return SCORES.get(player2Score) + "-All";
+            if (player1Score > 3)
+                return "Deuce";
+            return SCORES.get(player2Score) + SEPARATOR + ALL;
         }
-        return SCORES.get(player1Score) + "-" + SCORES.get(player2Score);
+        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
     }
 }
