@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 class ScoreFormatter {
-    private static final String SEPARATOR = "-";
-    private static final String ALL = "All";
-    private static final String DEUCE = "Deuce";
 
     private static final Map<Integer, String> SCORES = new HashMap<>();
+    private static final String SEPARATOR = "-";
+
     static {
         SCORES.put(0, "Love");
         SCORES.put(1, "Fifteen");
@@ -16,8 +15,16 @@ class ScoreFormatter {
         SCORES.put(3, "Forty");
     }
 
+    String simpleScore(int player1Score, int player2Score) {
+        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
+    }
+
+    String simpleDraw(int score) {
+        return SCORES.get(score) + SEPARATOR + "All";
+    }
+
     String deuce() {
-        return DEUCE;
+        return "Deuce";
     }
 
     String advantage(int player) {
@@ -26,13 +33,5 @@ class ScoreFormatter {
 
     String game(int player) {
         return "Game Player " + player;
-    }
-
-    String simpleDraw(int score) {
-        return SCORES.get(score) + SEPARATOR + ALL;
-    }
-
-    String simpleScore(int player1Score, int player2Score) {
-        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
     }
 }

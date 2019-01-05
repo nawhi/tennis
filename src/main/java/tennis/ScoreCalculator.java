@@ -2,16 +2,18 @@ package tennis;
 
 class ScoreCalculator {
 
-    private final int player1Score;
-    private final int player2Score;
-    private final int difference;
+    private final int scoreP1;
+    private final int scoreP2;
     private final ScoreFormatter formatter;
+    private final int leadingPlayer;
+    private final int difference;
 
-    ScoreCalculator(int player1Score, int player2Score) {
-        this.player1Score = player1Score;
-        this.player2Score = player2Score;
-        this.difference = calcDifference();
-        formatter = new ScoreFormatter();
+    ScoreCalculator(int scoreP1, int scoreP2) {
+        this.scoreP1 = scoreP1;
+        this.scoreP2 = scoreP2;
+        this.formatter = new ScoreFormatter();
+        this.leadingPlayer = (scoreP2 > scoreP1) ? 2 : 1;
+        this.difference = Math.abs(this.scoreP2 - this.scoreP1);
     }
 
     String score() {
@@ -19,44 +21,34 @@ class ScoreCalculator {
             return endgame();
         }
 
-        if (gotAWinner()) {
-            return formatter.game(leadingPlayer());
+        if (gotRegularWinner()) {
+            return formatter.game(leadingPlayer);
         }
-
 
         return regularScore();
     }
 
-    private String regularScore() {
-        if (difference == 0) {
-            return formatter.simpleDraw(player1Score);
-        }
-        return formatter.simpleScore(player1Score, player2Score);
-    }
-
-    private boolean gotAWinner() {
-        return player1Score > 3 || player2Score > 3;
-    }
-
     private boolean goneToDeuce() {
-        return player1Score >= 3 && player2Score >= 3;
+        return scoreP1 >= 3 && scoreP2 >= 3;
     }
 
     private String endgame() {
         if (difference > 1)
-            return formatter.game(leadingPlayer());
+            return formatter.game(leadingPlayer);
         if (difference == 1) {
-            return formatter.advantage(leadingPlayer());
+            return formatter.advantage(leadingPlayer);
         }
         return formatter.deuce();
     }
 
-    private int leadingPlayer() {
-        return (player2Score > player1Score) ? 2 : 1;
+    private boolean gotRegularWinner() {
+        return scoreP1 > 3 || scoreP2 > 3;
     }
 
-    private int calcDifference() {
-        return Math.abs(player2Score - player1Score);
+    private String regularScore() {
+        if (difference == 0) {
+            return formatter.simpleDraw(scoreP1);
+        }
+        return formatter.simpleScore(scoreP1, scoreP2);
     }
-
 }
