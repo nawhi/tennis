@@ -25,11 +25,8 @@ class ScoreCalculator {
     }
 
     String score() {
-        if (player1Score >= 3 && player2Score >= 3) {
-            if (player1Score == player2Score) {
-                return DEUCE;
-            }
-            return "Advantage " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
+        if (goneToDeuce()) {
+            return endgameScore();
         }
 
         if (player1Score > 3) {
@@ -39,20 +36,31 @@ class ScoreCalculator {
             return playerWins(2);
         }
         if (player1Score == player2Score) {
-            return regularDraw();
+            return simpleDraw();
         }
-        return regularScore();
+        return simpleScore();
+    }
+
+    private boolean goneToDeuce() {
+        return player1Score >= 3 && player2Score >= 3;
+    }
+
+    private String endgameScore() {
+        if (player1Score == player2Score) {
+            return DEUCE;
+        }
+        return "Advantage " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
     }
 
     private String playerWins(int player) {
         return "Game Player " + player;
     }
 
-    private String regularScore() {
-        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
+    private String simpleDraw() {
+        return SCORES.get(player2Score) + SEPARATOR + ALL;
     }
 
-    private String regularDraw() {
-        return SCORES.get(player2Score) + SEPARATOR + ALL;
+    private String simpleScore() {
+        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
     }
 }

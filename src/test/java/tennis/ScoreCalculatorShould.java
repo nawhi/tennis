@@ -30,7 +30,9 @@ class ScoreCalculatorShould {
 
             "3,3,Deuce",
             "4,3,Advantage Player 1",
-            "3,4,Advantage Player 2"
+            "3,4,Advantage Player 2",
+            "5,4,Advantage Player 1",
+            "11,12,Advantage Player 2"
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
         ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);
