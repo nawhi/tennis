@@ -9,16 +9,19 @@ class ScoreCalculatorShould {
 
     @ParameterizedTest
     @CsvSource({
-            "0,0,Love-All",
             "1,0,Fifteen-Love",
             "2,0,Thirty-Love",
             "3,0,Forty-Love",
+
             "0,1,Love-Fifteen",
             "0,2,Love-Thirty",
             "0,3,Love-Forty",
+
+            "0,0,Love-All",
+            "1,1,Fifteen-All"
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
-        ScoreCalculator calculator = new ScoreCalculator(new Score(player1Score, player2Score));
+        ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);
         assertEquals(expectedScore, calculator.score());
     }
 }
