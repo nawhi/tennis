@@ -8,6 +8,8 @@ class ScoreCalculator {
     }
 
     String score() {
+        if (score.player1() == 2)
+            return "Thirty-Love";
         if (score.player1() == 1)
             return "Fifteen-Love";
         return "Love-All";
