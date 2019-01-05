@@ -28,7 +28,9 @@ class ScoreCalculatorShould {
             "4,2,Game Player 1",
             "2,4,Game Player 2",
 
-            "3,3,Deuce"
+            "3,3,Deuce",
+            "4,3,Advantage Player 1",
+            "3,4,Advantage Player 2"
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
         ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);

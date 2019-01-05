@@ -25,8 +25,13 @@ class ScoreCalculator {
     }
 
     String score() {
-        if (player1Score == player2Score && player2Score == 3)
-            return DEUCE;
+        if (player1Score >= 3 && player2Score >= 3) {
+            if (player1Score == player2Score) {
+                return DEUCE;
+            }
+            return "Advantage " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
+        }
+
         if (player1Score > 3) {
             return playerWins(1);
         }
