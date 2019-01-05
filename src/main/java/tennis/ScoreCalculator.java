@@ -18,26 +18,29 @@ class ScoreCalculator {
 
     private final int player1Score;
     private final int player2Score;
+    private final int scoreDifference;
 
     ScoreCalculator(int player1Score, int player2Score) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
+        this.scoreDifference = scoreDifference();
     }
 
     String score() {
         if (goneToDeuce()) {
-            return endgameScore();
+            return endgame();
         }
 
         if (gotAWinner()) {
             return winner();
         }
 
+
         return regularScore();
     }
 
     private String regularScore() {
-        if (player1Score == player2Score) {
+        if (scoreDifference == 0) {
             return simpleDraw();
         }
         return simpleScore();
@@ -48,32 +51,32 @@ class ScoreCalculator {
     }
 
     private String winner() {
-        return "Game " + leadingPlayer();
+        return new ScoreFormatter().game(leadingPlayer());
     }
 
     private boolean goneToDeuce() {
         return player1Score >= 3 && player2Score >= 3;
     }
 
-    private String endgameScore() {
+    private String endgame() {
         if (player1Score == player2Score) {
             return DEUCE;
         }
-        if (scoreDifference() > 1)
+        if (scoreDifference > 1)
             return winner();
-        return "Advantage " + leadingPlayer();
+        return advantage();
     }
 
-    private String leadingPlayer() {
-        return (player2Score > player1Score) ? "Player 2" : "Player 1";
+    private String advantage() {
+        return new ScoreFormatter().advantage(leadingPlayer());
+    }
+
+    private int leadingPlayer() {
+        return (player2Score > player1Score) ? 2 : 1;
     }
 
     private int scoreDifference() {
         return Math.abs(player2Score - player1Score);
-    }
-
-    private String playerWins(int player) {
-        return "Game Player " + player;
     }
 
     private String simpleDraw() {
@@ -83,4 +86,5 @@ class ScoreCalculator {
     private String simpleScore() {
         return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
     }
+
 }
