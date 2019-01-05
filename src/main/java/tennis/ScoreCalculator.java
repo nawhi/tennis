@@ -29,16 +29,18 @@ class ScoreCalculator {
             return endgameScore();
         }
 
-        if (player1Score > 3) {
-            return playerWins(1);
+        if (player1Score > 3 || player2Score > 3) {
+            return winner();
         }
-        if (player2Score > 3) {
-            return playerWins(2);
-        }
+
         if (player1Score == player2Score) {
             return simpleDraw();
         }
         return simpleScore();
+    }
+
+    private String winner() {
+        return "Game " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
     }
 
     private boolean goneToDeuce() {
@@ -49,6 +51,8 @@ class ScoreCalculator {
         if (player1Score == player2Score) {
             return DEUCE;
         }
+        if (Math.abs(player2Score - player1Score) > 1)
+            return winner();
         return "Advantage " + ((player2Score > player1Score) ? "Player 2" : "Player 1");
     }
 
