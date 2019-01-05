@@ -23,10 +23,12 @@ class ScoreCalculator {
     }
 
     String score() {
-        if (player1Score > 3)
+        if (player1Score > 3) {
             return playerWins(1);
-        if (player2Score > 3)
+        }
+        if (player2Score > 3) {
             return playerWins(2);
+        }
         if (player1Score == player2Score) {
             return regularDraw();
         }

@@ -25,8 +25,8 @@ class ScoreCalculatorShould {
             "3,1,Forty-Fifteen",
             "3,2,Forty-Thirty",
 
-            "4,0,Game Player 1",
-            "0,4,Game Player 2"
+            "4,2,Game Player 1",
+            "2,4,Game Player 2",
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
         ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);
