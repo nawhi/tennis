@@ -10,6 +10,7 @@ class ScoreCalculator {
     static {
         SCORES.put(1, "Fifteen");
         SCORES.put(2, "Thirty");
+        SCORES.put(3, "Forty");
     }
 
     ScoreCalculator(Score score) {
