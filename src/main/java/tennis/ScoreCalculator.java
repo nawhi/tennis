@@ -8,6 +8,7 @@ class ScoreCalculator {
     private static final Map<Integer, String> SCORES = new HashMap<>();
 
     static {
+        SCORES.put(0, "Love");
         SCORES.put(1, "Fifteen");
         SCORES.put(2, "Thirty");
         SCORES.put(3, "Forty");
@@ -18,8 +19,8 @@ class ScoreCalculator {
     }
 
     String score() {
-        if (score.player1() > 0)
-            return SCORES.get(score.player1()) + "-Love";
+        if (score.player1() != score.player2())
+            return SCORES.get(score.player1()) + "-" + SCORES.get(score.player2());
         return "Love-All";
     }
 }
