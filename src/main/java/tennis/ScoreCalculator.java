@@ -1,20 +1,6 @@
 package tennis;
 
-import java.util.HashMap;
-import java.util.Map;
-
 class ScoreCalculator {
-    private static final String SEPARATOR = "-";
-    private static final String ALL = "All";
-    private static final String DEUCE = "Deuce";
-
-    private static final Map<Integer, String> SCORES = new HashMap<>();
-    static {
-        SCORES.put(0, "Love");
-        SCORES.put(1, "Fifteen");
-        SCORES.put(2, "Thirty");
-        SCORES.put(3, "Forty");
-    }
 
     private final int player1Score;
     private final int player2Score;
