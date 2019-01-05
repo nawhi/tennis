@@ -18,13 +18,13 @@ class ScoreCalculator {
 
     private final int player1Score;
     private final int player2Score;
-    private final int scoreDifference;
+    private final int difference;
     private final ScoreFormatter formatter;
 
     ScoreCalculator(int player1Score, int player2Score) {
         this.player1Score = player1Score;
         this.player2Score = player2Score;
-        this.scoreDifference = scoreDifference();
+        this.difference = calcDifference();
         formatter = new ScoreFormatter();
     }
 
@@ -34,7 +34,7 @@ class ScoreCalculator {
         }
 
         if (gotAWinner()) {
-            return winner();
+            return formatter.game(leadingPlayer());
         }
 
 
@@ -42,18 +42,14 @@ class ScoreCalculator {
     }
 
     private String regularScore() {
-        if (scoreDifference == 0) {
-            return simpleDraw();
+        if (difference == 0) {
+            return formatter.simpleDraw(player1Score);
         }
-        return simpleScore();
+        return formatter.simpleScore(player1Score, player2Score);
     }
 
     private boolean gotAWinner() {
         return player1Score > 3 || player2Score > 3;
-    }
-
-    private String winner() {
-        return formatter.game(leadingPlayer());
     }
 
     private boolean goneToDeuce() {
@@ -61,32 +57,20 @@ class ScoreCalculator {
     }
 
     private String endgame() {
-        if (player1Score == player2Score) {
-            return new ScoreFormatter().deuce();
+        if (difference > 1)
+            return formatter.game(leadingPlayer());
+        if (difference == 1) {
+            return formatter.advantage(leadingPlayer());
         }
-        if (scoreDifference > 1)
-            return winner();
-        return advantage();
-    }
-
-    private String advantage() {
-        return formatter.advantage(leadingPlayer());
+        return formatter.deuce();
     }
 
     private int leadingPlayer() {
         return (player2Score > player1Score) ? 2 : 1;
     }
 
-    private int scoreDifference() {
+    private int calcDifference() {
         return Math.abs(player2Score - player1Score);
-    }
-
-    private String simpleDraw() {
-        return formatter.simpleDraw(player1Score);
-    }
-
-    private String simpleScore() {
-        return formatter.simpleScore(player1Score, player2Score);
     }
 
 }
