@@ -6,8 +6,6 @@ import java.util.Map;
 class ScoreFormatter {
 
     private static final Map<Integer, String> SCORES = new HashMap<>();
-    private static final String SEPARATOR = "-";
-
     static {
         SCORES.put(0, "Love");
         SCORES.put(1, "Fifteen");
@@ -16,11 +14,11 @@ class ScoreFormatter {
     }
 
     String simpleScore(int player1Score, int player2Score) {
-        return SCORES.get(player1Score) + SEPARATOR + SCORES.get(player2Score);
+        return SCORES.get(player1Score) + "-" + SCORES.get(player2Score);
     }
 
     String simpleDraw(int score) {
-        return SCORES.get(score) + SEPARATOR + "All";
+        return SCORES.get(score) + "-All";
     }
 
     String deuce() {

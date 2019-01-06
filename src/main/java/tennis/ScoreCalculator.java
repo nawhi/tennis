@@ -33,12 +33,13 @@ class ScoreCalculator {
     }
 
     private String endgame() {
-        if (difference > 1)
-            return formatter.game(leadingPlayer);
+        if (difference == 0) {
+            return formatter.deuce();
+        }
         if (difference == 1) {
             return formatter.advantage(leadingPlayer);
         }
-        return formatter.deuce();
+        return formatter.game(leadingPlayer);
     }
 
     private boolean gotRegularWinner() {
