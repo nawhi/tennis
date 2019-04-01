@@ -38,7 +38,6 @@ class ScoreCalculatorShould {
             "11,13,Game Player 2"
     })
     void calculate_scores(int player1Score, int player2Score, String expectedScore) {
-        ScoreCalculator calculator = new ScoreCalculator(player1Score, player2Score);
-        assertEquals(expectedScore, calculator.score());
+        assertEquals(expectedScore, new ScoreCalculator(player1Score, player2Score).score());
     }
 }
